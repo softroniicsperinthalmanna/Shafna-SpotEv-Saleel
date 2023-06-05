@@ -1,5 +1,16 @@
 import 'package:flutter/material.dart';
 import 'Screens/OTPverification.dart';
+import 'Screens/Station/home/ChargingHistory/StationChargingHistory.dart';
+import 'Screens/Station/home/HomePage.dart';
+import 'Screens/Station/home/MyStation/AddStation.dart';
+import 'Screens/Station/home/ManageEv/StationDetailsPage.dart';
+import 'Screens/Station/home/ManageEv/StationListandAddStation.dart';
+import 'Screens/Station/home/ManageEv/stationSubmitPage.dart';
+import 'Screens/Station/home/MyStation/StationLocationSubmitPage.dart';
+
+import 'Screens/Station/home/StationBooking/BookingBottom.dart';
+
+import 'Screens/Station/home/Stationprofile/stationProfileEdit.dart';
 import 'Screens/User/Booking/Bookingcomplete.dart';
 import 'Screens/User/Booking/Bookingtabbar.dart';
 import 'Screens/User/Booking/cancelledBookings.dart';
@@ -28,8 +39,10 @@ import 'Screens/User/profile/editprofile.dart';
 
 import 'Screens/User/profile/profile.dart';
 import 'Screens/User/wallet/walletPage.dart';
+
 import 'Screens/otpPage.dart';
 import 'Screens/signup.dart';
+import 'Screens/forgetPassword.dart';
 import 'login.dart';
 void main(){
  runApp (MyApp());
@@ -41,8 +54,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home:
-      BottomNavBar(),
+      home:StationHomePage()
+     // BottomNavBar(),
     );
   }
 }

@@ -108,7 +108,24 @@ class StationRating extends StatelessWidget {
                 ],
               ),
             ),
-          )
+          ),
+          SizedBox(height: 100,),
+          Padding(
+            padding: const EdgeInsets.all(15),
+            child: Container(
+                height: 50,
+                width: double.infinity,
+                child: ElevatedButton(
+
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      backgroundColor: Color(0xff5A5AD2),
+                      foregroundColor: Colors.white
+                    ),
+                    onPressed: (){}, child: Text('Post'))),
+          ),
         ],
       ),
     );

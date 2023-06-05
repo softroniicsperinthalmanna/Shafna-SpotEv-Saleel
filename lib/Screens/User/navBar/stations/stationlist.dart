@@ -96,7 +96,7 @@ var is_selected=false;
                         Navigator.push(context, MaterialPageRoute(builder: (context)=>StationDetailPage()));
                       },
                       child: Container(
-                        height: 150,
+                        height: 160,
                         width: double.infinity,
                         decoration: BoxDecoration(
                           border: Border.all(
@@ -118,7 +118,7 @@ var is_selected=false;
                                       Text('YX Vestby'),
                                       SizedBox(width: 19,),
                                       Text('45km'),
-                                      SizedBox(width: 160,),
+                                      SizedBox(width:100,),
                                       IconButton(onPressed: () {
                                         setState(() {
                                           is_selected=!is_selected;
@@ -126,7 +126,10 @@ var is_selected=false;
                                       },
                                       icon: (is_selected)?Icon(Icons.star,color: Colors.amber,):Icon(Icons.star_border)),
                                       SizedBox(width: 10,),
-                                      Icon(Icons.turn_right_sharp)
+                                      CircleAvatar(
+                                          radius: 10,
+                                          backgroundColor: Colors.blue,
+                                          child: Icon(Icons.turn_right_rounded))
                                     ],
                                   ),
                                   Text('Palakkad'),

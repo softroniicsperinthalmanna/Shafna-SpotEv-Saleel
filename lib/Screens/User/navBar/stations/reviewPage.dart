@@ -79,66 +79,76 @@ var is_selected_down=false;
               ),
               Text('Sort by',style: TextStyle(fontSize: 18),),
               SizedBox(height: 10,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                      height: 30,
-                      width: 90,
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(width: 10,),
+                    Container(
+                        height: 30,
+                        width: 90,
+                        child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              backgroundColor: Colors.grey,
+                              foregroundColor: Color(0xff5A5AD2),
                             ),
-                            backgroundColor: Colors.grey,
-                            foregroundColor: Color(0xff5A5AD2),
-                          ),
-                          onPressed: (){}, child: Text('Top Rated',style: TextStyle(fontSize: 12),))),
-                  Container(
-                      height: 30,
-                      width: 90,
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            side: BorderSide(
-                              color: Colors.black
+                            onPressed: (){}, child: Text('Top Rated',style: TextStyle(fontSize: 12),))),
+                    SizedBox(width: 10,),
+
+                    Container(
+                        height: 30,
+                        width: 90,
+                        child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              side: BorderSide(
+                                color: Colors.black
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              backgroundColor: Colors.white,
+                              foregroundColor: Colors.black,
                             ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
+                            onPressed: (){}, child: Text('Newest',style: TextStyle(fontSize: 12),))),
+                    SizedBox(width: 10,),
+
+                    Container(
+                        height: 30,
+                        width: 90,
+                        child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              side: BorderSide(
+                                color: Colors.black
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              backgroundColor: Colors.white,
+                              foregroundColor: Colors.black,
                             ),
-                            backgroundColor: Colors.white,
-                            foregroundColor: Colors.black,
-                          ),
-                          onPressed: (){}, child: Text('Newest',style: TextStyle(fontSize: 12),))),
-                  Container(
-                      height: 30,
-                      width: 90,
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            side: BorderSide(
-                              color: Colors.black
+                            onPressed: (){}, child: Text('Highest',style: TextStyle(fontSize: 12),))),
+                    SizedBox(width: 10,),
+                    Container(
+                        height: 30,
+                        width: 90,
+                        child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              side: BorderSide(
+                                color: Colors.black
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              backgroundColor: Colors.white,
+                              foregroundColor: Colors.black,
                             ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            backgroundColor: Colors.white,
-                            foregroundColor: Colors.black,
-                          ),
-                          onPressed: (){}, child: Text('Highest',style: TextStyle(fontSize: 12),))), Container(
-                      height: 30,
-                      width: 90,
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            side: BorderSide(
-                              color: Colors.black
-                            ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            backgroundColor: Colors.white,
-                            foregroundColor: Colors.black,
-                          ),
-                          onPressed: (){}, child: Text('Lowest',style: TextStyle(fontSize: 12),))),
-                ],
+                            onPressed: (){}, child: Text('Lowest',style: TextStyle(fontSize: 12),))),
+                  ],
+                ),
               ),
               Container(
                 height: MediaQuery.of(context).size.height,

@@ -39,7 +39,7 @@ class OfferPage extends StatelessWidget {
                 children: [
                   Container(
                     height: 150,
-                    width: 185,
+                    width: 165,
                     decoration: BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage('assets/offer2.png'),fit:BoxFit.cover
@@ -50,7 +50,7 @@ class OfferPage extends StatelessWidget {
 
                   Container(
                     height: 150,
-                    width: 185,
+                    width: 165,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage('assets/offer1.png'),fit: BoxFit.cover

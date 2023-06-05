@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:spot_ev/Screens/styles/textstyle.dart';
+
+import '../login.dart';
+import 'User/navBar/home/homePage.dart';
+import 'User/navBar/navBar.dart';
 class signUPPage extends StatelessWidget {
   const signUPPage({Key? key}) : super(key: key);
 
@@ -156,12 +160,15 @@ class signUPPage extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)
                     ),
-                    backgroundColor: Color(0xff0000FF),
+                    backgroundColor: Color(0xff6C6CD5),
 
 
 
                   ),
-                  onPressed: (){}, child: Text('REGISTER', style: TextStyle(color: Colors.white),)),
+                  onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>BottomNavBar()));
+
+                  }, child: Text('REGISTER', style: TextStyle(color: Colors.white),)),
             ),
 
 
@@ -171,7 +178,9 @@ class signUPPage extends StatelessWidget {
               children: [
                 SizedBox(height: 60,),
                 Text('Have an Account?',style: email,),
-                TextButton(onPressed: (){}, child: Text('Sign In',style: email,))
+                TextButton(onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+                }, child: Text('Sign In',style: email,))
 
               ],
             ),

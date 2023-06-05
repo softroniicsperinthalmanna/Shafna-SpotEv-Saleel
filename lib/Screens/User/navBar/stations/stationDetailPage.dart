@@ -17,7 +17,9 @@ class StationDetailPage extends StatelessWidget {
             SizedBox(height: 10,),
             Padding(
               padding: const EdgeInsets.only(top:20),
-              child: Icon(Icons.arrow_back_rounded),
+              child: IconButton(icon: Icon(Icons.arrow_back_rounded), onPressed: () {
+                Navigator.pop(context);
+              },),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -181,7 +183,7 @@ class StationDetailPage extends StatelessWidget {
               children: [
                 Container(
                   height: 90,
-                  width: 125,
+                  width: 100,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage('assets/ev 1.jpg'),fit: BoxFit.cover
@@ -190,7 +192,7 @@ class StationDetailPage extends StatelessWidget {
                 ),
                 Container(
                   height: 90,
-                  width: 125,
+                  width: 100,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage('assets/ev2.jpg'),fit: BoxFit.cover
@@ -198,7 +200,7 @@ class StationDetailPage extends StatelessWidget {
                   ),
                 ),Container(
                   height: 90,
-                  width: 125,
+                  width: 100,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage('assets/ev3.jpg'),fit: BoxFit.cover

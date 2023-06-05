@@ -409,21 +409,23 @@ double _curentValue=50;
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Container(
-                                        height: 50,
+                                    Card(
+                                      child: Container(
+                                          height: 50,
                                 width: 140,
                                 child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.white,
-                                      foregroundColor: Colors.black,
-                                      side: BorderSide(
-                                        color: Color(0xff0000FF),
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.white,
+                                        foregroundColor: Colors.black,
+                                        side: BorderSide(
+                                          color: Color(0xff0000FF),
+                                        ),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(10)
+                                        )
                                       ),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10)
-                                      )
-                                    ),
-                                    onPressed: (){}, child: Text('Clear Filters'))) ,
+                                      onPressed: (){}, child: Text('Clear Filters'))),
+                                    ) ,
                                     SizedBox(width: 20,),
                                     Container(
                                         height: 50,

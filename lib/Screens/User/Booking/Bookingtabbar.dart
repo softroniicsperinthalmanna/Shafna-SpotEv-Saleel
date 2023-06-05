@@ -28,7 +28,7 @@ class BookingTabbar extends StatelessWidget {
         IconButton(onPressed: () {
       Navigator.pop(context);
       }, icon:Icon( Icons.arrow_back,color: Colors.white,) ),
-      SizedBox(width: 100,),
+      SizedBox(width: 80,),
       Text('My Bookings',style: booking,textAlign: TextAlign.center,),
       ],
     ),

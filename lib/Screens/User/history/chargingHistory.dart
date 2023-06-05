@@ -11,6 +11,8 @@ class ChargingHistory extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               height: 150,
@@ -27,10 +29,68 @@ class ChargingHistory extends StatelessWidget {
                   IconButton(onPressed: () {
                     Navigator.pop(context);
                   }, icon:Icon( Icons.arrow_back,color: Colors.white,) ),
-                  SizedBox(width: 100,),
+                  SizedBox(width: 70,),
                   Text('Charging History',style: booking,textAlign: TextAlign.center,),
                 ],
               ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text('   Sort by'),
+            ),
+            Row(
+              children: [
+                SizedBox(width: 15,),
+
+                Container(
+                  height: 30,
+                  width: 90,
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.grey[400],
+                        foregroundColor: Color(0xff0000FF),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        )
+                      ),
+                      onPressed: (){}, child: Text('Bydate')),
+                ),
+                SizedBox(width: 15,),
+                Container(
+                  height: 30,
+                  width: 90,
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        foregroundColor: Color(0xff000000),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        side: BorderSide(
+                          color: Colors.black
+                        )
+                      ),
+                      onPressed: (){}, child: Text('Newest')),
+                ),
+                SizedBox(width: 15,),
+
+                Container(
+                  height: 30,
+                  width: 90,
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        foregroundColor: Color(0xff000000),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        side: BorderSide(
+                          color: Colors.black
+                        )
+                      ),
+                      onPressed: (){}, child: Text('Oldest')),
+                ),
+              ],
             ),
             SizedBox(height: 15,),
             Container(
@@ -53,7 +113,7 @@ class ChargingHistory extends StatelessWidget {
                         },
                         child: Container(
                           width: double.infinity,
-                          height: 100,
+                          height: 110,
                           decoration: BoxDecoration(
                             border: Border.all(
                               color: Color(0xff5A5AD2),

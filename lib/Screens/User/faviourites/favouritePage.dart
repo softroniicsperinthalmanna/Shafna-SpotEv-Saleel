@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:spot_ev/Screens/User/faviourites/favlist.dart';
 
@@ -26,7 +27,7 @@ class favouritePage extends StatelessWidget {
                   IconButton(onPressed: () {
                     Navigator.pop(context);
                   }, icon:Icon( Icons.arrow_back,color: Colors.white,) ),
-                  SizedBox(width: 100,),
+                  SizedBox(width: 90,),
                   Text('Favorite',style: booking,textAlign: TextAlign.center,),
                 ],
               ),            ),
@@ -52,21 +53,19 @@ class favouritePage extends StatelessWidget {
                           ),
                           borderRadius: BorderRadius.circular(15),
                         ),
-                        child: Expanded(
-                          child: ListTile(
-                            leading: Icon(Icons.heart_broken_sharp,color: Colors.red,),
-                            title: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('${fav[index]['name']}'),
-                                Text('${fav[index]['add']}'),
-                                Text('${fav[index]['pin']}'),
+                        child: ListTile(
+                          leading: Icon(CupertinoIcons.heart_fill,color: Colors.red,),
+                          title: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('${fav[index]['name']}'),
+                              Text('${fav[index]['add']}'),
+                              Text('${fav[index]['pin']}'),
 
-                              ],
-                            ),
-                            trailing: Icon(Icons.delete,color: Colors.black,),
+                            ],
                           ),
+                          trailing: Icon(Icons.delete,color: Colors.black,),
                         ),
                       ),
                     ),

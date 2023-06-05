@@ -32,7 +32,7 @@ class _paymentHistoryState extends State<paymentHistory> {
                   IconButton(onPressed: () {
                     Navigator.pop(context);
                   }, icon:Icon( Icons.arrow_back,color: Colors.white,) ),
-                  SizedBox(width: 100,),
+                  SizedBox(width: 70,),
                   Text('Payment History',style: booking,textAlign: TextAlign.center,),
                 ],
               ),
