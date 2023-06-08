@@ -17,21 +17,34 @@ var is_selected=false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        // leading: Icon(Icons.arrow_back),
+        title: Center(child: Text('Station')),
+        toolbarHeight: 80,
+        backgroundColor: Color(0xff5A5AD2),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(20),
+            )
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              height: 150,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  color: Color(0xff5A5AD2),
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(30),
-                      bottomRight: Radius.circular(30)
-                  )
-              ),
-              child: Center(child: Text('Stations',style: booking,textAlign: TextAlign.center,)),
-            ),
+            // Container(
+            //   height: 150,
+            //   width: MediaQuery.of(context).size.width,
+            //   decoration: BoxDecoration(
+            //       color: Color(0xff5A5AD2),
+            //       borderRadius: BorderRadius.only(
+            //           bottomLeft: Radius.circular(30),
+            //           bottomRight: Radius.circular(30)
+            //       )
+            //   ),
+            //   child: Center(child: Text('Stations',style: booking,textAlign: TextAlign.center,)),
+            // ),
             Stack(
               children: [
                 Padding(
@@ -58,22 +71,10 @@ var is_selected=false;
                       child: CircleAvatar(
                         radius: 24,
                         backgroundColor: Colors.black,
-                        child: GestureDetector(
-                          onTap: (){
-                           showModalBottomSheet(
-                               context: context, builder: (context){
-                             return Container(
-                               height: 200,
-                               width: double.infinity,
-                               color: Colors.red,
-                             );
-                           });
-                          },
-                          child: CircleAvatar(
-                              radius: 22.5,
-                              backgroundColor: Colors.white,
-                              child: Icon(CupertinoIcons.slider_horizontal_3,color: Colors.black,)),
-                        ),
+                        child: CircleAvatar(
+                            radius: 22.5,
+                            backgroundColor: Colors.white,
+                            child: Icon(CupertinoIcons.slider_horizontal_3,color: Colors.black,)),
                       )),
                 ),
               ],
@@ -126,10 +127,7 @@ var is_selected=false;
                                       },
                                       icon: (is_selected)?Icon(Icons.star,color: Colors.amber,):Icon(Icons.star_border)),
                                       SizedBox(width: 10,),
-                                      CircleAvatar(
-                                          radius: 10,
-                                          backgroundColor: Colors.blue,
-                                          child: Icon(Icons.turn_right_rounded))
+                                      Icon(Icons.turn_right_rounded)
                                     ],
                                   ),
                                   Text('Palakkad'),

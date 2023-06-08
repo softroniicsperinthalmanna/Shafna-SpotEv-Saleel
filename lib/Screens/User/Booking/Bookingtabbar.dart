@@ -11,28 +11,40 @@ class BookingTabbar extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        appBar: AppBar(
+          // leading: Icon(Icons.arrow_back),
+          title: Center(child: Text('My Bookings')),
+          toolbarHeight: 80,
+          backgroundColor: Color(0xff5A5AD2),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(20),
+                bottomRight: Radius.circular(20),
+              )
+          ),
+        ),
         body:  Column(
           children: [
-            Container(
-              height: 150,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  color: Color(0xff5A5AD2),
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(30),
-                      bottomRight: Radius.circular(30)
-                  )
-              ),
-              child: Row(
-        children: [
-        IconButton(onPressed: () {
-      Navigator.pop(context);
-      }, icon:Icon( Icons.arrow_back,color: Colors.white,) ),
-      SizedBox(width: 80,),
-      Text('My Bookings',style: booking,textAlign: TextAlign.center,),
-      ],
-    ),
-            ),
+    //         Container(
+    //           height: 150,
+    //           width: MediaQuery.of(context).size.width,
+    //           decoration: BoxDecoration(
+    //               color: Color(0xff5A5AD2),
+    //               borderRadius: BorderRadius.only(
+    //                   bottomLeft: Radius.circular(30),
+    //                   bottomRight: Radius.circular(30)
+    //               )
+    //           ),
+    //           child: Row(
+    //     children: [
+    //     IconButton(onPressed: () {
+    //   Navigator.pop(context);
+    //   }, icon:Icon( Icons.arrow_back,color: Colors.white,) ),
+    //   SizedBox(width: 80,),
+    //   Text('My Bookings',style: booking,textAlign: TextAlign.center,),
+    //   ],
+    // ),
+    //         ),
             TabBar(
               labelColor: Colors.black,
               unselectedLabelColor: Colors.black,

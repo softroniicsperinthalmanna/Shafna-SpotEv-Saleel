@@ -65,7 +65,7 @@ class TripPlannerPage extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 280,top: 7),
+                        padding: const EdgeInsets.only(left: 280,top: 2),
                         child: Container(
                             height: 35,
                             width: 100,

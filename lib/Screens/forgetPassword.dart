@@ -7,30 +7,42 @@ class ForgetPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        // leading: Icon(Icons.arrow_back),
+        title: Center(child: Text('Forgot Password')),
+        toolbarHeight: 130,
+        backgroundColor: Color(0xff5A5AD2),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(20),
+            )
+        ),
+      ),
     body: Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          height: 150,
-          width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-              color: Color(0xff5A5AD2),
-              borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(30),
-                  bottomRight: Radius.circular(30)
-              )
-          ),
-          child: Row(
-            children: [
-              IconButton(onPressed: () {
-                Navigator.pop(context);
-              }, icon:Icon( Icons.arrow_back,color: Colors.white,) ),
-              SizedBox(width: 60,),
-              Text('Forgot Password',style: booking,textAlign: TextAlign.center,),
-            ],
-          ),
-        ),
+        // Container(
+        //   height: 150,
+        //   width: MediaQuery.of(context).size.width,
+        //   decoration: BoxDecoration(
+        //       color: Color(0xff5A5AD2),
+        //       borderRadius: BorderRadius.only(
+        //           bottomLeft: Radius.circular(30),
+        //           bottomRight: Radius.circular(30)
+        //       )
+        //   ),
+        //   child: Row(
+        //     children: [
+        //       IconButton(onPressed: () {
+        //         Navigator.pop(context);
+        //       }, icon:Icon( Icons.arrow_back,color: Colors.white,) ),
+        //       SizedBox(width: 60,),
+        //       Text('',style: booking,textAlign: TextAlign.center,),
+        //     ],
+        //   ),
+        // ),
         SizedBox(height: 40,),
         Column(
          crossAxisAlignment: CrossAxisAlignment.center,

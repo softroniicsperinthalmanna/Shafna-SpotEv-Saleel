@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'Screens/AppBarPage.dart';
 import 'Screens/OTPverification.dart';
 import 'Screens/Station/home/ChargingHistory/StationChargingHistory.dart';
 import 'Screens/Station/home/HomePage.dart';
@@ -40,6 +41,7 @@ import 'Screens/User/profile/editprofile.dart';
 import 'Screens/User/profile/profile.dart';
 import 'Screens/User/wallet/walletPage.dart';
 
+import 'Screens/UserORStationPage.dart';
 import 'Screens/otpPage.dart';
 import 'Screens/signup.dart';
 import 'Screens/forgetPassword.dart';
@@ -54,7 +56,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home:StationHomePage()
+      home:USerORStationPage()
      // BottomNavBar(),
     );
   }

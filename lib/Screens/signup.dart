@@ -166,7 +166,7 @@ class signUPPage extends StatelessWidget {
 
                   ),
                   onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>BottomNavBar()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
 
                   }, child: Text('REGISTER', style: TextStyle(color: Colors.white),)),
             ),

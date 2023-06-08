@@ -7,31 +7,43 @@ class StationOfferPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        // leading: Icon(Icons.arrow_back),
+        title: Center(child: Text('Offers')),
+        toolbarHeight: 80,
+        backgroundColor: Color(0xff5A5AD2),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(20),
+            )
+        ),
+      ),
       body:  Padding(
         padding: const EdgeInsets.all(10),
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Container(
-                height: 150,
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                    color: Color(0xff5A5AD2),
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(30),
-                        bottomRight: Radius.circular(30)
-                    )
-                ),
-                child: Row(
-                  children: [
-                    IconButton(onPressed: () {
-                      Navigator.pop(context);
-                    }, icon:Icon( Icons.arrow_back,color: Colors.white,) ),
-                    SizedBox(width: 100,),
-                    Text('Offers',style: booking,textAlign: TextAlign.center,),
-                  ],
-                ),
-              ),
+              // Container(
+              //   height: 150,
+              //   width: MediaQuery.of(context).size.width,
+              //   decoration: BoxDecoration(
+              //       color: Color(0xff5A5AD2),
+              //       borderRadius: BorderRadius.only(
+              //           bottomLeft: Radius.circular(30),
+              //           bottomRight: Radius.circular(30)
+              //       )
+              //   ),
+              //   child: Row(
+              //     children: [
+              //       IconButton(onPressed: () {
+              //         Navigator.pop(context);
+              //       }, icon:Icon( Icons.arrow_back,color: Colors.white,) ),
+              //       SizedBox(width: 100,),
+              //       Text('Offers',style: booking,textAlign: TextAlign.center,),
+              //     ],
+              //   ),
+              // ),
               SizedBox(height: 20,),
               Container(
                 height: 150,
