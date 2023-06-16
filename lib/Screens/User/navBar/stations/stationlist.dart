@@ -32,6 +32,8 @@ var is_selected=false;
       ),
       body: SingleChildScrollView(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Container(
             //   height: 150,
@@ -81,8 +83,12 @@ var is_selected=false;
             ),
             SizedBox(height: 10,),
             Container(
+             // flex: 2,
               height: MediaQuery.of(context).size.height,
               child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  physics: const ClampingScrollPhysics(),
                   itemCount: 3,
                   itemBuilder: (context,index){
                 return Padding(

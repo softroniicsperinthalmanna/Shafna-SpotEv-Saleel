@@ -1,5 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:spot_ev/Screens/UserORStationPage.dart';
+import 'package:spot_ev/Screens/connect.dart';
 
 import '../../../login.dart';
 import '../../styles/textstyle.dart';
@@ -12,8 +17,22 @@ import '../wallet/walletPage.dart';
 import 'editprofile.dart';
 
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
    ProfilePage({Key? key}) : super(key: key);
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+Future<void> RecieveData() async {
+  var response=await get(Uri.parse('${con.url}/UserProfileRead.php'));
+  jsonDecode(response.body);
+  // if(jsonEncode(response.body)['result']=='Success'){
+  //
+  // }
+
+}
 
   @override
   Widget build(BuildContext context) {
@@ -261,7 +280,7 @@ class ProfilePage extends StatelessWidget {
                                   title: Text('Are you sure you want to logout ?'),
                                   actions: [
                                     TextButton(onPressed: (){
-                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>USerORStationPage()));
                                     }, child: Text('yes')),
                                     TextButton(onPressed: (){}, child: Text('No'))
                                   ],

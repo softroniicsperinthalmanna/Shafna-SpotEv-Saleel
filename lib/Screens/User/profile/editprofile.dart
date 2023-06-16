@@ -62,15 +62,8 @@ class EditProfilePage extends StatelessWidget {
                             ),
                           ),
                         ),
-                      )
-                    ],
-                  ),
-                  SizedBox(height: 6,),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-
+                      ),
+                      SizedBox(height: 6,),
                       Text('    Mobile No',),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -89,15 +82,8 @@ class EditProfilePage extends StatelessWidget {
                             ),
                           ),
                         ),
-                      )
-                    ],
-                  ),
-                  SizedBox(height: 6,),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-
+                      ),
+                      SizedBox(height: 6,),
                       Text('    Email',),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -116,15 +102,8 @@ class EditProfilePage extends StatelessWidget {
                             ),
                           ),
                         ),
-                      )
-                    ],
-                  ),
-                  SizedBox(height: 6,),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-
+                      ),
+                      SizedBox(height: 6,),
                       Text('    Password',),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -143,15 +122,8 @@ class EditProfilePage extends StatelessWidget {
                             ),
                           ),
                         ),
-                      )
-                    ],
-                  ),
-                  SizedBox(height: 6,),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-
+                      ),
+                      SizedBox(height: 6,),
                       Text('    Confirm Password',),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -170,9 +142,10 @@ class EditProfilePage extends StatelessWidget {
                             ),
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
+
                   SizedBox(height: 18,),
                   Container(
                     height: 40,

@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 
-import '../../../styles/textstyle.dart';
 import 'StationChargingHistoryDetails.dart';
-import 'StationPayemntHistory.dart';
-class StationChargingHistory extends StatelessWidget {
-  const StationChargingHistory({Key? key}) : super(key: key);
+class PaymentHistoryPage extends StatelessWidget {
+  const PaymentHistoryPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         // leading: Icon(Icons.arrow_back),
-        title: Center(child: Text('Charging History')),
+        title: Center(child: Text('Payment History')),
         toolbarHeight: 80,
         backgroundColor: Color(0xff5A5AD2),
         shape: RoundedRectangleBorder(
@@ -67,7 +65,6 @@ class StationChargingHistory extends StatelessWidget {
                       onPressed: (){}, child: Text('Newest')),
                 ),
 
-
                 Container(
                   height: 30,
                   width: 90,
@@ -85,10 +82,11 @@ class StationChargingHistory extends StatelessWidget {
                       onPressed: (){}, child: Text('Oldest')),
                 ),
                 IconButton(onPressed: (){
-                  showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime(2020), lastDate: DateTime(2100));
+                  showDatePicker(context: context, initialDate:DateTime.now(), firstDate: DateTime(2020), lastDate: DateTime(2100));
                 }, icon: Icon(Icons.calendar_month,color: Colors.red,size: 35,))
               ],
             ),
+
             SizedBox(height: 15,),
             Container(
               height: MediaQuery.of(context).size.height,
@@ -104,57 +102,38 @@ class StationChargingHistory extends StatelessWidget {
                       elevation: 10,
                       child: GestureDetector(
                         onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>StationPayemntHistory(
-                            price:Stationcharging[index]['rate'],
-                          ),));
+                         // Navigator.push(context, MaterialPageRoute(builder: (context)=>StationPayemntHistory(
+                          //  price:Stationcharging[index]['rate'],
+                        //  ),));
                         },
                         child: Container(
                           width: double.infinity,
-                          height: 110,
+                          height: 90,
                           decoration: BoxDecoration(
                             border: Border.all(
                               color: Color(0xff5A5AD2),
                             ),
                             borderRadius: BorderRadius.circular(15),
                           ),
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 10,top: 3),
-                            child: Column(
-                              children: [
-
-                                Row(
-                                  children: [
-                                    Text(' ${Stationcharging[index]['date']}'),
-                                    SizedBox(width: 20,),
-                                    Text('${Stationcharging[index]['time']}'),
-                                  ],
-                                ),
-                                // SizedBox(height: 10,),
-                                Row(
-                                  children: [
-                                    Icon(Icons.person_2_outlined),
-                                    SizedBox(width: 10,),
-                                    Text('${Stationcharging[index]['name']}'),
-                                    Expanded(
-                                      child: ListTile(
-                                        trailing: Text('Rs.${Stationcharging[index]['rate']}'),
-                                      ),
-                                    ),
-
-
-                                  ],
-                                )  ,
-                                Row(
-                                  children: [
-                                    Icon(Icons.radio_button_checked_sharp),
-                                    SizedBox(width: 10,),
-                                    Text('${Stationcharging[index]['type']}'),
-                                  ],
-                                ),
-
-                              ],
-                            ),
-                          ),
+                          child:Column(
+                            children: [
+                              ListTile(
+                                leading: Icon(Icons.person_outline,color: Color(0xff0000FF),),
+                                title: Text('${Stationcharging[index]['name']}'),
+                                trailing: Text('Rs${Stationcharging[index]['rate']}'),
+                              ),
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 15),
+                                    child: Text(' ${Stationcharging[index]['date']}'),
+                                  ),
+                                  SizedBox(width: 20,),
+                                  Text('${Stationcharging[index]['time']}'),
+                                ],
+                              ),
+                            ],
+                          )
                         ),
                       ),
                     ),

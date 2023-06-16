@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../styles/textstyle.dart';
+import 'ChargingHistory/PaymentHistoryPage.dart';
 import 'ChargingHistory/StationChargingHistory.dart';
 import 'ManageEv/StationListandAddStation.dart';
 import 'Offers/Offerpage.dart';
@@ -140,7 +141,7 @@ class StationHomePage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Icon(Icons.history,color: Colors.white,size: 40,),
-                              Text('History',style: profile,)
+                              Text('Charging History',style: profile,)
                             ],
                           ),
                         ),
@@ -175,30 +176,59 @@ class StationHomePage extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(20),
-                  child: GestureDetector(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ComplaintPage()));
-                    },
-                    child: Container(
-                      height: 130,
-                      width: 140,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Color(0xff0000ff),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>ComplaintPage()));
+                        },
+                        child: Container(
+                          height: 130,
+                          width: 140,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Color(0xff0000ff),
 
+                            ),
+                            borderRadius: BorderRadius.circular(15),
+                            color: Color(0xff1560F0),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Icon(Icons.list_alt_sharp,color: Colors.white,size: 40,),
+                              Text('Complaints',style: profile,)
+                            ],
+                          ),
                         ),
-                        borderRadius: BorderRadius.circular(15),
-                        color: Color(0xff1560F0),
                       ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(Icons.list_alt_sharp,color: Colors.white,size: 40,),
-                          Text('Complaints',style: profile,)
-                        ],
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>PaymentHistoryPage()));
+                        },
+                        child: Container(
+                          height: 130,
+                          width: 140,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Color(0xff0000ff),
+
+                            ),
+                            borderRadius: BorderRadius.circular(15),
+                            color: Color(0xff306576),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Icon(Icons.history,color: Colors.white,size: 40,),                              Text('Payment History',style: profile,)
+                            ],
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
                 ),
               ],
