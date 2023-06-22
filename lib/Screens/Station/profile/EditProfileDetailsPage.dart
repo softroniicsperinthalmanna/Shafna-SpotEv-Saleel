@@ -19,11 +19,6 @@ class EditProfileDetailPage extends StatefulWidget {
 }
 
 class _EditProfileDetailPageState extends State<EditProfileDetailPage> {
-  var locContent = 'Click button below to get the location';
-
-  var myLatitude;
-
-  var myLongitude;
 
   var thisName = TextEditingController();
 

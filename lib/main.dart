@@ -9,6 +9,7 @@ import 'Screens/Station/home/ManageEv/StationDetailsPage.dart';
 import 'Screens/Station/home/ManageEv/StationListandAddStation.dart';
 import 'Screens/Station/home/ManageEv/stationSubmitPage.dart';
 import 'Screens/Station/home/MyStation/Slots/SlotsDropDowns.dart';
+import 'Screens/Station/home/MyStation/Slots/Stationlots.dart';
 import 'Screens/Station/home/MyStation/StationLocationSubmitPage.dart';
 
 import 'Screens/Station/home/StationBooking/BookingBottom.dart';
@@ -21,12 +22,12 @@ import 'Screens/Station/profile/stationLocationEditPage.dart';
 import 'Screens/User/Booking/Bookingcomplete.dart';
 import 'Screens/User/Booking/Bookingtabbar.dart';
 import 'Screens/User/Booking/cancelledBookings.dart';
+import 'Screens/User/BrandView/SELECTFILE.dart';
 import 'Screens/User/Trips/tripPage.dart';
 import 'Screens/User/faviourites/favouritePage.dart';
 import 'Screens/User/history/chargingHistory.dart';
 import 'Screens/User/history/paymentHistory.dart';
-import 'Screens/User/manageEv/manageVehicle.dart';
-import 'Screens/User/manageEv/selectVehicle.dart';
+
 import 'Screens/User/navBar/home/homePage.dart';
 import 'Screens/User/navBar/navBar.dart';
 import 'Screens/User/navBar/offerPage.dart';
@@ -62,7 +63,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home:DropDownButtonPage()
+      home:ProfilePage()
      // BottomNavBar(),
     );
   }

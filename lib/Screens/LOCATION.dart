@@ -8,6 +8,7 @@ class LocationController extends GetxController {
   String? currentLocation;
   var myLat;
   var myLong;
+  var myplc;
   Future<Position> getPosition() async {
     LocationPermission?permission;
     permission = await Geolocator.checkPermission();
@@ -33,7 +34,7 @@ class LocationController extends GetxController {
       currentLocation =
       "${place.locality},${place.street},${place.subLocality},${place
           .subAdministrativeArea}";
-
+      myplc=place.locality;
       myLat=lat;
       myLong=long;
       update();

@@ -10,7 +10,7 @@ class ForgetPassword extends StatelessWidget {
       appBar: AppBar(
         // leading: Icon(Icons.arrow_back),
         title: Center(child: Text('Forgot Password')),
-        toolbarHeight: 130,
+        toolbarHeight: 70,
         backgroundColor: Color(0xff5A5AD2),
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(

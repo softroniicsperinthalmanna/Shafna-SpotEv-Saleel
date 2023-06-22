@@ -1,8 +1,58 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:spot_ev/Screens/connect.dart';
+import 'package:spot_ev/Screens/styles/textstyle.dart';
+
+import 'changePasswordPage.dart';
 
 
-class EditProfilePage extends StatelessWidget {
-  const EditProfilePage({Key? key}) : super(key: key);
+class EditProfilePage extends StatefulWidget {
+   EditProfilePage({Key? key,required this.name,required this.mail,required this.mob,required this.id}) : super(key: key);
+  var name,mob,mail,id;
+
+  @override
+  State<EditProfilePage> createState() => _EditProfilePageState();
+}
+
+class _EditProfilePageState extends State<EditProfilePage> {
+  var thisname=TextEditingController();
+
+  var thismail=TextEditingController();
+
+  var thismob=TextEditingController();
+
+  Future<void> UpdateProfile() async {
+    var data={
+      'name':thisname.text,
+      'email':thismail.text,
+      'mobile_no':thismob.text,
+      'login_id':widget.id.toString(),
+    };
+    var response=await post(Uri.parse('${con.url}/UserProfileEdit.php'),body: data);
+    print(response.body);
+    if(jsonDecode(response.body)['result']=='Success'){
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Profile Updated')));
+      Navigator.pop(context);
+    }
+    else{
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Profile Not Updated')));
+      Navigator.pop(context);
+    }
+  }
+
+  @override
+  void initState() {
+    setState(() {});
+    super.initState();
+    print(widget.name);
+    print(widget.mob);
+    print(widget.mail);
+    thisname.text = widget.name;
+    thismob.text = widget.mob;
+    thismail.text = widget.mail;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +61,7 @@ class EditProfilePage extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Stack(
-            
+
             children: [
               Column(
 
@@ -30,7 +80,7 @@ class EditProfilePage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        IconButton(onPressed: () { 
+                        IconButton(onPressed: () {
                           Navigator.pop(context);
                         }, icon: Icon(Icons.arrow_back,color: Colors.white,),),
                       ],
@@ -50,14 +100,14 @@ class EditProfilePage extends StatelessWidget {
                           elevation: 10,
                           color: Colors.black,
                           child: TextFormField(
-
+                            controller: thisname,
                             decoration: InputDecoration(
                               enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide.none
                               ),
                               filled: true,
                               fillColor: Colors.white,
-                              hintText: 'ENTER YOUR NAME',
+
                               prefixIcon: Icon(Icons.person_outline,),
                             ),
                           ),
@@ -71,13 +121,15 @@ class EditProfilePage extends StatelessWidget {
                           elevation: 10,
                           color: Colors.black,
                           child: TextFormField(
+                            keyboardType: TextInputType.number,
+                            controller: thismob,
                             decoration: InputDecoration(
                               enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide.none
                               ),
                               filled: true,
                               fillColor: Colors.white,
-                              hintText: 'ENTER YOUR PHONE NUMBER',
+
                               prefixIcon: Icon(Icons.phone_outlined,),
                             ),
                           ),
@@ -91,76 +143,46 @@ class EditProfilePage extends StatelessWidget {
                           elevation: 10,
                           color: Colors.black,
                           child: TextFormField(
+                            keyboardType: TextInputType.emailAddress,
+                            controller: thismail,
                             decoration: InputDecoration(
                               enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide.none
                               ),
                               filled: true,
                               fillColor: Colors.white,
-                              hintText: 'ENTER YOUR EMAIL',
+
                               prefixIcon: Icon(Icons.mail_outline_rounded,),
                             ),
                           ),
                         ),
                       ),
-                      SizedBox(height: 6,),
-                      Text('    Password',),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Card(
-                          elevation: 10,
-                          color: Colors.black,
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide.none
-                              ),
-                              filled: true,
-                              fillColor: Colors.white,
-                              hintText: 'ENTER YOUR PASSWORD',
-                              prefixIcon: Icon(Icons.lock_outline,),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 6,),
-                      Text('    Confirm Password',),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Card(
-                          elevation: 10,
-                          color: Colors.black,
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide.none
-                              ),
-                              filled: true,
-                              fillColor: Colors.white,
-                              hintText: 'CONFIRM PASSWORD',
-                              prefixIcon: Icon(Icons.lock_outline,),
-                            ),
-                          ),
-                        ),
-                      ),
+
+                      TextButton(onPressed: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>ChangePasswordPage()));
+                      }, child: Text('   Change Password'))
                     ],
                   ),
 
                   SizedBox(height: 18,),
                   Container(
                     height: 40,
-                    width: 350,
+                    width: 200,
                     child: ElevatedButton(
                         style:ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)
+                              borderRadius: BorderRadius.circular(10)
                           ),
                           backgroundColor: Color(0xff5A5AD2),
 
 
 
                         ),
-                        onPressed: (){}, child: Text('Edit Profile', style: TextStyle(color: Colors.white),)),
+                        onPressed: (){
+                          setState(() {
+                            UpdateProfile();
+                          });
+                        }, child: Text('Edit Profile', style: TextStyle(color: Colors.white),)),
                   ),
 
                 ],

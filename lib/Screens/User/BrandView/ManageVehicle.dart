@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:spot_ev/Screens/User/manageEv/selectVehicle.dart';
 
 import '../../styles/textstyle.dart';
+import 'SELECTFILE.dart';
 class ManageVehicle extends StatelessWidget {
   const ManageVehicle({Key? key}) : super(key: key);
 
@@ -56,7 +56,7 @@ class ManageVehicle extends StatelessWidget {
                   height: 100,
                   width:300,
                   decoration: BoxDecoration(
-                  color: Color(0xffB5B5D3),
+                    color: Color(0xffB5B5D3),
                     borderRadius: BorderRadius.circular(10),),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -81,15 +81,15 @@ class ManageVehicle extends StatelessWidget {
               child: Center(
                 child: GestureDetector(
                   onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>SelectVehicles()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>SelectVehicle()));
                   },
                   child: Container(
-                    height: 100,
-                    width: 300,
-                    decoration: BoxDecoration(
-                      color: Color(0xffB5B5D3),
-                      borderRadius: BorderRadius.circular(10),),
-                    child: Image(image: AssetImage('assets/addcar.webp'),fit: BoxFit.cover,)
+                      height: 100,
+                      width: 300,
+                      decoration: BoxDecoration(
+                        color: Color(0xffB5B5D3),
+                        borderRadius: BorderRadius.circular(10),),
+                      child: Image(image: AssetImage('assets/addcar.webp'),fit: BoxFit.cover,)
 
                   ),
                 ),
