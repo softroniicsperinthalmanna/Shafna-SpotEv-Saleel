@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spot_ev/Screens/Station/profile/StationProfile.dart';
+import 'package:spot_ev/Screens/UserORStationPage.dart';
 
 import 'home/HomePage.dart';
 
@@ -13,7 +14,22 @@ class StationBottomNavBArPage extends StatefulWidget {
 
 class _StationBottomNavBArPageState extends State<StationBottomNavBArPage> {
   int current_index = 0;
-  List items = [StationHomePage(), StationProfilePage()];
+  Future LogoutDialog(){
+  return showDialog(context: context, builder: (context){
+    return AlertDialog(
+      title: Text('Are you sure you want to logout?'),
+      actions: [
+        TextButton(onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>USerORStationPage()));
+        }, child: Text('Yes')),
+        TextButton(onPressed: (){
+          Navigator.pop(context);
+    }, child: Text('No')),
+      ],
+    );
+  });
+  }
+  List items = [StationHomePage(), StationProfilePage(),];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +45,11 @@ class _StationBottomNavBArPageState extends State<StationBottomNavBArPage> {
           BottomNavigationBarItem(icon: Icon(Icons.home_filled,),
           label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.person),
-          label: 'Profile')
+          label: 'Profile'),
+          BottomNavigationBarItem(icon: IconButton(onPressed: () {
+            LogoutDialog();
+          }, icon: Icon(Icons.logout),),
+          label: 'Logout')
         ],
       ),
     );

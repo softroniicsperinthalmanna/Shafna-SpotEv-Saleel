@@ -14,7 +14,7 @@ class BookASection extends StatelessWidget {
             title: Center(child: Text('Book a section')),
             toolbarHeight: 80,
             backgroundColor: Color(0xff5A5AD2),
-            shape: RoundedRectangleBorder(
+            shape: RoundedRectangleBorder(x
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(20),
                   bottomRight: Radius.circular(20),
@@ -22,6 +22,7 @@ class BookASection extends StatelessWidget {
             ),
           ),
       body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
         child: Column(
           children: [
             // Container(

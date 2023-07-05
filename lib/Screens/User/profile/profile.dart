@@ -3,6 +3,9 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:spot_ev/Screens/Station/home/complaints.dart';
+import 'package:spot_ev/Screens/User/popupmenu/community.dart';
 import 'package:spot_ev/Screens/UserORStationPage.dart';
 import 'package:spot_ev/Screens/connect.dart';
 
@@ -14,6 +17,7 @@ import '../BrandView/ManageVehicle.dart';
 import '../Trips/tripPage.dart';
 import '../faviourites/favouritePage.dart';
 import '../history/chargingHistory.dart';
+import '../popupmenu/complaints.dart';
 import '../wallet/walletPage.dart';
 import 'editprofile.dart';
 
@@ -26,7 +30,12 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  var uid = 11;
+  Future<String?> getLoginId() async {
+    SharedPreferences pref =await SharedPreferences.getInstance();
+    String? LoginID=pref.getString('LoginID');
+    return LoginID;
+  }
+  var uid ;
   var flag = 0;
   Future<void> refresh() async {
     await Future.delayed(Duration(seconds: 1));
@@ -35,9 +44,14 @@ class _ProfilePageState extends State<ProfilePage> {
     });
   }
   Future<dynamic> RecieveData() async {
-    var data = {'login_id': uid.toString()};
+    uid= await getLoginId();
+    var data = {'login_id': uid};
     var response = await post(Uri.parse('${con.url}/UserProfileRead.php'),body: data);
+    if(uid!=null)
     print('uid: $uid');
+    else{
+      print('uid value not found');
+    }
     print(response.body);
 
     if (jsonDecode(response.body)[0]['result'] == 'Success') {
@@ -50,12 +64,63 @@ class _ProfilePageState extends State<ProfilePage> {
     }
     return jsonDecode(response.body);
   }
+  @override
+  void initState(){
+    super.initState();
+    setState(() {
+      getLoginId();
+    });
+  }
 
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xff5A5AD2),
+        elevation: 0,
+        automaticallyImplyLeading: false,
+        toolbarHeight: 30,
+      ),
+      endDrawer: Drawer(
+  backgroundColor: Colors.white,
+        child: Column(
+          children: [
+            SizedBox(height: 50,),
+            Container(
+                height: 60,
+                width: double.infinity,
+                child: OutlinedButton(onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>complaintPage()));
+                }, child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Icon(Icons.note_add_outlined,color: Colors.black,),
+                   // SizedBox(width: 20,),
+                    Text('Complaint',style: TextStyle(color: Colors.black,fontSize: 18),),
+                    Icon(Icons.navigate_next,color: Colors.black,),
+                  ],
+                ))),
+            SizedBox(height: 10,),
+            Container(
+                height: 60,
+                width: double.infinity,
+                child: OutlinedButton(onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>communityPage()));
+
+                }, child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Icon(Icons.sync,color: Colors.black,),
+                   // SizedBox(width: 20,),
+                    Text('Community',style: TextStyle(color: Colors.black,fontSize: 18),),
+                    Icon(Icons.navigate_next,color: Colors.black,),
+                  ],
+                ))),
+          ],
+        ),
+      ),
 
       body: SafeArea(
         child: RefreshIndicator(
@@ -128,50 +193,56 @@ class _ProfilePageState extends State<ProfilePage> {
                                   '${snapshot.data[0]['name']}', style: profile,)
                               ],
                             ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(height: 14,),
-                                Text('${snapshot.data[0]['email']}',
-                                  style: profile,),
-                                Text('${snapshot.data[0]['mobile_no']}',
-                                  style: profile,),
-                                SizedBox(height: 25,),
-                                Container(
-                                  height: 30,
-                                  child: ElevatedButton(
-                                      style:ElevatedButton.styleFrom(
-                                        backgroundColor: Color(0xffD9D9D9),
-                                      ),
-                                      onPressed: () {}, child: Row(
-                                    children: [
-                                      Icon(Icons.edit, color: Colors.black,),
-                                      SizedBox(height: 45,),
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.push(context, MaterialPageRoute(
-                                            builder: (context) =>
-                                                EditProfilePage(
-                                                  name:snapshot.data[0]['name'],
-                                                  mob:snapshot.data[0]['mobile_no'],
-                                                  mail:snapshot.data[0]['email'],
-                                                  id:uid,
-                                                ),));
-                                        },
-                                        child: Text(
-                                          ' Edit Profile', style: TextStyle(
-                                            color: Colors.black
-                                        ),),
-                                      )
-                                    ],
-                                  )),
-                                )
-                              ],
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(height: 14,),
+                                  Text('     ${snapshot.data[0]['email']}',
+                                    style: profile,),
+                                  Text('     ${snapshot.data[0]['mobile_no']}',
+                                    style: profile,),
+                                  SizedBox(height: 25,),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left:15),
+                                    child: Container(
+                                      height: 30,
+                                      width: 145,
+                                      child: ElevatedButton(
+                                          style:ElevatedButton.styleFrom(
+                                            backgroundColor: Color(0xffD9D9D9),
+                                          ),
+                                          onPressed: () {}, child: Row(
+                                        children: [
+                                          Icon(Icons.edit, color: Colors.black,),
+                                          SizedBox(height: 45,),
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.push(context, MaterialPageRoute(
+                                                builder: (context) =>
+                                                    EditProfilePage(
+                                                      name:snapshot.data[0]['name'],
+                                                      mob:snapshot.data[0]['mobile_no'],
+                                                      mail:snapshot.data[0]['email'],
+                                                      id:uid,
+                                                    ),));
+                                            },
+                                            child: Text(
+                                              ' Edit Profile', style: TextStyle(
+                                                color: Colors.black
+                                            ),),
+                                          )
+                                        ],
+                                      )),
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                             //Pop up menu
-                            Icon(CupertinoIcons.line_horizontal_3,
-                              color: Colors.white,)
+                            // Icon(CupertinoIcons.line_horizontal_3,
+                            //   color: Colors.white,)
 
                           ],
                         ),

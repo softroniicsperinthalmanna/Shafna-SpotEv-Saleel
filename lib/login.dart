@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spot_ev/Screens/User/navBar/home/homePage.dart';
 import 'package:spot_ev/Screens/connect.dart';
 
@@ -21,7 +22,15 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
+
 class _LoginPageState extends State<LoginPage> {
+  Future<void> saveLoginId(String LoginID)  async {
+     SharedPreferences prefs=await SharedPreferences.getInstance();
+
+   prefs.setString('LoginID',LoginID);
+
+
+  }
   var visible = true;
   var mail = TextEditingController();
   var pass = TextEditingController();
@@ -33,7 +42,12 @@ class _LoginPageState extends State<LoginPage> {
       'user_type': widget.type,
     };
     var response = await post(Uri.parse('${con.url}/login.php'), body: data);
-    jsonDecode(response.body);
+    print(jsonDecode(response.body));
+    var LoginID;
+    LoginID=jsonDecode(response.body)['log_id'];
+    print(LoginID);
+    if(LoginID!=null)
+    saveLoginId(LoginID);
     if (jsonDecode(response.body)['result'] == 'User successfully login') {
       if (widget.type == 'user') {
         Navigator.pushReplacement(
@@ -44,7 +58,9 @@ class _LoginPageState extends State<LoginPage> {
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text('station Login')));
         Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => StationBottomNavBArPage()));
+            MaterialPageRoute(builder: (context) => StationBottomNavBArPage(
+             // LoginID:'LoginID',
+            )));
       }
     } else {
       ScaffoldMessenger.of(context)

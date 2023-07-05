@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spot_ev/Screens/Station/profile/stationLocationEditPage.dart';
 import 'package:spot_ev/Screens/connect.dart';
 
@@ -18,18 +19,29 @@ class StationProfilePage extends StatefulWidget {
   @override
   State<StationProfilePage> createState() => _StationProfilePageState();
 }
-
-var uid = 21;
+Future<String?> getLoginId() async {
+  SharedPreferences pref =await SharedPreferences.getInstance();
+  String? LoginID=pref.getString('LoginID');
+  return LoginID;
+}
+var uid;
 var flag = 0;
 Future<void> refresh() async {
   await Future.delayed(Duration(seconds: 2));
 }
 
 Future<dynamic> RecieveData() async {
+  uid=await getLoginId();
   print('uid: $uid');
-  var data = {'login_id': uid.toString()};
+  var data = {'login_id': uid};
   var response =
       await post(Uri.parse('${con.url}/StationReadProfile.php'), body: data);
+  if(uid!=null)
+    print('uid: $uid');
+  else{
+    print('uid value not found');
+  }
+  //print(response.body);
   print(response.body);
   if (jsonDecode(response.body)[0]['result'] == 'Success') {
     flag = 1;
@@ -47,18 +59,23 @@ class _StationProfilePageState extends State<StationProfilePage> {
   var myLongitude;
   var myplace;
   var locText = 'No Data';
-  var uid = '21';
+  var uid ;
   Future<void> SendLocation() async {
+    uid=await getLoginId();
     var data = {
       'place': myplace,
       'location': locContent,
       'lattitude': myLatitude.toString(),
       'longitude': myLongitude.toString(),
-      'station_id': uid,
+      'login_id': uid,
     };
-
     var response =
-        await post(Uri.parse('${con.url}/InsertLocation.php'), body: data);
+        await post(Uri.parse('${con.url}/UpdateLocation.php'), body: data);
+    if(uid!=null)
+      print('uid: $uid');
+    else{
+      print('uid value not found');
+    }
     print(response.body);
     if (jsonDecode(response.body)['result'] == 'Success') {
       ScaffoldMessenger.of(context)
