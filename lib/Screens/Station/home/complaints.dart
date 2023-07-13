@@ -31,7 +31,7 @@ class _ComplaintPageState extends State<ComplaintPage> {
   Future<dynamic> RecieveData() async {
     uid=await getLoginId();
     print('uid: $uid');
-    var data = {'login_id': uid};
+    var data = {'station_id': uid};
     var response =
     await post(Uri.parse('${con.url}/complaintViewPage.php'), body: data);
     if(uid!=null)
@@ -233,7 +233,8 @@ class _ComplaintPageState extends State<ComplaintPage> {
 
                           ),
                         );
-                      }):Center(child: Text('There is no Complaints to show.....'),);
+                      }):
+                  Text('\n\n\nThere is no Complaints to show.....');
                 },
 
               ),

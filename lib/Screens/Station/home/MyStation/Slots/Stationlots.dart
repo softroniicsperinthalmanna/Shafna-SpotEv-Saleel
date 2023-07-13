@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spot_ev/Screens/connect.dart';
 import 'SlotsDropDowns.dart';
 class StationSlotPage extends StatefulWidget {
@@ -9,13 +10,28 @@ class StationSlotPage extends StatefulWidget {
   @override
   State<StationSlotPage> createState() => _StationSlotPageState();
 }
-var uid='18';
-var flag = 0 ;
+Future<String?> getLoginId() async {
+  SharedPreferences pref =await SharedPreferences.getInstance();
+  String? LoginID=pref.getString('LoginID');
+  return LoginID;
+}
+var uid;
+var flag = 0;
+
 Future<dynamic> RecieveData() async {
+  uid=await getLoginId();
+  print('uid: $uid');
+
   var data={
     'station_id':uid,
   };
   var response=await post(Uri.parse('${con.url}/slotsListViewPage.php',),body:data);
+  if(uid!=null)
+    print('uid: $uid');
+  else{
+    print('uid value not found');
+  }
+  //print(response.body);
   print(response.body);
   if(jsonDecode(response.body)[0]['result']=='Success'){
     flag=1;
@@ -28,7 +44,9 @@ Future<dynamic> RecieveData() async {
   }
 
   return jsonDecode(response.body);
+
 }
+
 class _StationSlotPageState extends State<StationSlotPage> {
   @override
   Widget build(BuildContext context) {
@@ -99,7 +117,7 @@ class _StationSlotPageState extends State<StationSlotPage> {
                           ),
                         );
                       }):
-                      Center(child: CircularProgressIndicator(),);
+                      Center(child: Text('No slots added ...'),);
                   ;
                 },
 

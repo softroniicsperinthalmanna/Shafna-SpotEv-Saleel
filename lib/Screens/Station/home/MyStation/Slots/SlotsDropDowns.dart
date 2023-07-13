@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spot_ev/Screens/connect.dart';
 
 import '../../../../styles/textstyle.dart';
@@ -16,38 +17,51 @@ class DropDownButtonPage extends StatefulWidget {
 }
 
 class _DropDownButtonPageState extends State<DropDownButtonPage> {
-  var voltage = [
-    110,
-    20,
-    50,
-  ];
-  var charger = [
-    'CHAdeMo',
-    'CCS',
-    'TYPE-2',
-    'GB/T',
-    'CCS2',
-  ];
-  var price = [
-    100,
-    200,
-    110,
-    150,
-    50,
-  ];
-  var uid = '18';
-  var voltagevalue;
-  var chargerValue;
-  var priceValue;
+  var Data = [];
+  var drop_flag = 0;
+  // var charger = [
+  //   'CHAdeMo',
+  //   'CCS',
+  //   'TYPE-2',
+  //   'GB/T',
+  //   'CCS2',
+  // ];
+  // var price = [
+  //   100,
+  //   200,
+  //   110,
+  //   150,
+  //   50,
+  // ];
+
+  var connector_id;
+
+
+  Future<String?> getLoginId() async {
+    SharedPreferences pref =await SharedPreferences.getInstance();
+    String? LoginID=pref.getString('LoginID');
+    return LoginID;
+  }
+  var Sid;
+
   Future<void> SendData() async {
+    Sid= await getLoginId();
     var data = {
-      'connector_type': chargerValue,
-      'power_capacity': voltagevalue.toString(),
-      'price': priceValue.toString(),
-      'station_id': '18',
+      // 'connector_type': chargerValue,
+      // 'power_capacity': voltagevalue.toString(),
+      // 'price': priceValue.toString(),
+       'connector_id': connector_id.toString(),
+      'station_id':Sid.toString(),
     };
     var response =
         await post(Uri.parse('${con.url}/insertSlot.php'), body: data);
+
+    if(Sid!=null)
+      print('user_id: $Sid');
+    else{
+      print('uid value not found');
+    }
+
     print(response.body);
     if (jsonDecode(response.body)['result'] == 'Success') {
       ScaffoldMessenger.of(context)
@@ -60,6 +74,44 @@ class _DropDownButtonPageState extends State<DropDownButtonPage> {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => StationSlotPage()));
     }
+    @override
+    void initstate(){
+      super.initState();
+      setState(() {
+        getLoginId();
+      });
+    }
+  }
+  Future<void> RecieveDropDown() async {
+    var response=await post(Uri.parse('${con.url}/ViewSlotDropDownList.php'));
+    if (response.statusCode == 200 &&
+        jsonDecode(response.body)[0]['result'] == 'Success') {
+      drop_flag = 1;
+      var Complaint_type = jsonDecode(response.body);
+      print('*********************************************');
+      print('Slots are = $Complaint_type');
+
+      setState(() {
+        Data = Complaint_type
+            .map((listItem) => {
+          'connector_type': listItem['connector_type'],
+          'power_capacity': listItem['power_capacity'],
+          'price': listItem['price'],
+          'connector_id': listItem['connector_id'],
+        })
+            .toList();
+      });
+      print('*********************************************');
+
+      print('ListData is = $Data');
+      // return jsonDecode(response.body);
+    }
+
+  }
+  @override
+  void initState() {
+    super.initState();
+    RecieveDropDown();
   }
 
   @override
@@ -83,134 +135,45 @@ class _DropDownButtonPageState extends State<DropDownButtonPage> {
           SizedBox(
             height: 120,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Voltage'),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    height: 40,
-                    width: 150,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Color(0xff0000ff),
-                        width: 1.5,
-                      ),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: DropdownButton(
-                        style: TextStyle(fontSize: 16, color: Colors.black),
-                        underline: Container(),
-                        isExpanded: true,
-                        hint: Text(' Voltage'),
-                        value: voltagevalue,
-                        items: voltage
-                            .map((e) => DropdownMenuItem(
-                                  child: Text('$e kw'),
-                                  value: e,
-                                ))
-                            .toList(),
-                        onChanged: (val) {
-                          setState(() {
-                            voltagevalue = val;
-                          });
-                        }),
-                  ),
-                ],
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Charger-type'),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    height: 40,
-                    width: 150,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Color(0xff0000ff),
-                        width: 1.5,
-                      ),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: DropdownButton(
-                        style: TextStyle(fontSize: 16, color: Colors.black),
-                        underline: Container(),
-                        isExpanded: true,
-                        hint: Text(' Charger type'),
-                        value: chargerValue,
-                        items: charger
-                            .map((e) => DropdownMenuItem(
-                                  child: Text('$e'),
-                                  value: e,
-                                ))
-                            .toList(),
-                        onChanged: (val) {
-                          setState(() {
-                            chargerValue = val;
-                          });
-                        }),
-                  ),
-                ],
-              ),
-            ],
-          ),
+
           SizedBox(
-            height: 40,
+            height: 10,
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Price'),
-                SizedBox(
-                  height: 10,
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              height: 60,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Color(0xff0000ff),
+                  width: 1.5,
                 ),
-                Container(
-                  height: 40,
-                  width: 150,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Color(0xff0000ff),
-                      width: 1.5,
-                    ),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: DropdownButton(
-                      hint: Text(' Price'),
-                      underline: Container(),
-                      isExpanded: true,
-                      style: TextStyle(fontSize: 16, color: Colors.black),
-                      value: priceValue,
-                      items: price
-                          .map((e) => DropdownMenuItem(
-                                child: Text('₹ $e /hour'),
-                                value: e,
-                              ))
-                          .toList(),
-                      onChanged: (val) {
-                        setState(() {
-                          priceValue = val;
-                        });
-                      }),
-                ),
-              ],
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: DropdownButton(
+                  style: TextStyle(fontSize: 16, color: Colors.black),
+                  underline: Container(),
+                  isExpanded: true,
+                  hint: Text(' Add'),
+                  value: connector_id,
+                  items: Data
+                      .map((e) => DropdownMenuItem(
+                            child: ListTile(
+                              title: Text('${e['connector_type']} '),
+                              subtitle: Text('${e['power_capacity']} kw'),
+                              trailing: Text('₹ ${e['price']} '),
+                            ),
+                            value: e['connector_id'].toString(),
+                          )).toList(),
+                  onChanged: (val) {
+                    setState(() {
+                      connector_id = val;
+                    });
+                  }),
             ),
           ),
-          SizedBox(
-            height: 50,
-          ),
+
           // Row(
           //   mainAxisAlignment: MainAxisAlignment.center,
           //   children: [
@@ -240,9 +203,9 @@ class _DropDownButtonPageState extends State<DropDownButtonPage> {
                         borderRadius: BorderRadius.circular(10),
                       )),
                   onPressed: () {
-                    print(voltagevalue);
-                    print(chargerValue);
-                    print(priceValue);
+                    // print(voltagevalue);
+                    // print(chargerValue);
+                    // print(priceValue);
                     //  print(uid);
                     setState(() {
                       SendData();

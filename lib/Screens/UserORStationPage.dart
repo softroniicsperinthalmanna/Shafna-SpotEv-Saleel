@@ -24,7 +24,7 @@ class USerORStationPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 40,),
-            Text('join the electric \n  rEVELUTION',style: TextStyle(color: Color(0xff5A5AD2),fontSize: 25,fontWeight: FontWeight.bold),),
+            Text('join the electric \n  rEVOLUTION',style: TextStyle(color: Color(0xff5A5AD2),fontSize: 25,fontWeight: FontWeight.bold),),
            SizedBox(height: 90,),
             Text('Make Vehicle charging easy',style: TextStyle(color: Color(0xff1818C8),fontSize: 25),),
             SizedBox(height: 70,),

@@ -10,6 +10,7 @@ import 'package:spot_ev/Screens/connect.dart';
 
 import '../../LOCATION.dart';
 import '../../styles/textstyle.dart';
+import '../home/MyStation/Slots/Stationlots.dart';
 import 'EditProfileDetailsPage.dart';
 import 'changePasswordPage.dart';
 
@@ -19,47 +20,48 @@ class StationProfilePage extends StatefulWidget {
   @override
   State<StationProfilePage> createState() => _StationProfilePageState();
 }
-Future<String?> getLoginId() async {
-  SharedPreferences pref =await SharedPreferences.getInstance();
-  String? LoginID=pref.getString('LoginID');
-  return LoginID;
-}
-var uid;
-var flag = 0;
-Future<void> refresh() async {
-  await Future.delayed(Duration(seconds: 2));
-}
 
-Future<dynamic> RecieveData() async {
-  uid=await getLoginId();
-  print('uid: $uid');
-  var data = {'login_id': uid};
-  var response =
-      await post(Uri.parse('${con.url}/StationReadProfile.php'), body: data);
-  if(uid!=null)
-    print('uid: $uid');
-  else{
-    print('uid value not found');
-  }
-  //print(response.body);
-  print(response.body);
-  if (jsonDecode(response.body)[0]['result'] == 'Success') {
-    flag = 1;
-    print(response.body);
-  } else {
-    flag = 0;
-    print(response.body);
-  }
-  return jsonDecode(response.body);
-}
 
 class _StationProfilePageState extends State<StationProfilePage> {
+  Future<String?> getLoginId() async {
+    SharedPreferences pref =await SharedPreferences.getInstance();
+    String? LoginID=pref.getString('LoginID');
+    return LoginID;
+  }
+  var uid;
+  var flag = 0;
+  Future<void> refresh() async {
+    await Future.delayed(Duration(seconds: 2));
+  }
+
+  Future<dynamic> RecieveData() async {
+    uid=await getLoginId();
+    print('uid: $uid');
+    var data = {'login_id': uid.toString()};
+    var response =
+    await post(Uri.parse('${con.url}/StationReadProfile.php'), body: data);
+    if(uid!=null)
+      print('uid: $uid');
+    else{
+      print('uid value not found');
+    }
+    //print(response.body);
+    print(response.body);
+    if (jsonDecode(response.body)[0]['result'] == 'Success') {
+      flag = 1;
+      print(response.body);
+    } else {
+      flag = 0;
+      print(response.body);
+    }
+    return jsonDecode(response.body);
+  }
   var locContent = 'Click button below to get the location';
   var myLatitude;
   var myLongitude;
   var myplace;
   var locText = 'No Data';
-  var uid ;
+
   Future<void> SendLocation() async {
     uid=await getLoginId();
     var data = {
@@ -90,6 +92,14 @@ class _StationProfilePageState extends State<StationProfilePage> {
       // Navigator.pushReplacement(context,
       //     MaterialPageRoute(builder: (context) => StationProfilePage()));
     }
+return jsonDecode(response.body);
+  }
+  @override
+  void initstate(){
+    super.initState();
+    setState(() {
+      getLoginId();
+    });
   }
 
   @override
@@ -461,6 +471,18 @@ class _StationProfilePageState extends State<StationProfilePage> {
                             child: CircularProgressIndicator(),
                           );
                   },
+                ),
+              ),
+              SizedBox(height: 50,),
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Container(
+                    width: double.infinity,
+                    child: ElevatedButton(onPressed: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>StationSlotPage()));
+                    }, child: Text('My Slots')),
+                  ),
                 ),
               ),
               // Column(
